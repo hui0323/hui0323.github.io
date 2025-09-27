@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>联想平板 超值优惠购买指南 | 省500+元攻略</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4a90e2',
+                        secondary: '#ff9500',
+                        success: '#34c759',
+                        danger: '#ff3b30',
+                        dark: '#1d1d1f',
+                        light: '#f5f7fa',
+                        'gray-medium': '#8e8e93',
+                        'gray-light': '#e2e2e7'
+                    },
+                    fontFamily: {
+                        sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif']
+                    },
+                    boxShadow: {
+                        'ios': '0 4px 14px 0 rgba(0, 0, 0, 0.05)',
+                        'ios-hover': '0 6px 20px 0 rgba(0, 0, 0, 0.08)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            .transition-ios {
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .scale-ios {
+                transition: transform 0.2s ease;
+            }
+            .scale-ios:active {
+                transform: scale(0.98);
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-4px);
+            }
+        }
+    </style>
+</head>
+<body class="bg-light text-dark font-sans">
+    <!-- 顶部通知栏 -->
+    <div class="bg-secondary text-white py-2 px-4 text-center text-sm animate-pulse">
+        <i class="fa fa-bell mr-1"></i> 限时优惠：国补活动仅剩 <span id="countdown" class="font-bold">3</span> 天！
+    </div>
+
+    <!-- 头部横幅 -->
+    <header class="relative overflow-hidden bg-gradient-to-r from-primary to-primary/80 text-white">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute inset-0 bg-[url('https://picsum.photos/id/1/1200/600')] bg-cover bg-center"></div>
+        </div>
+        <div class="container mx-auto px-4 py-12 md:py-20 relative z-10">
+            <div class="max-w-2xl mx-auto text-center">
+                <h1 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-4 leading-tight text-shadow animate-fade-in">
+                    联想平板 <span class="text-yellow-200">超值省钱</span> 攻略
+                </h1>
+                <p class="text-[clamp(1rem,2vw,1.25rem)] mb-8 opacity-90">
+                    学生认证 + 国补 + 淘金币 + 省钱卡 + 一淘返利
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <div class="bg-white/20 backdrop-blur-sm rounded-full px-6 py-3 text-center">
+                        <div class="text-2xl md:text-3xl font-bold">省500+元</div>
+                        <div class="text-sm opacity-80">最高优惠金额</div>
+                    </div>
+                    <div class="bg-white/20 backdrop-blur-sm rounded-full px-6 py-3 text-center">
+                        <div class="text-2xl md:text-3xl font-bold">100+</div>
+                        <div class="text-sm opacity-80">已帮助用户</div>
+                    </div>
+                    <div class="bg-white/20 backdrop-blur-sm rounded-full px-6 py-3 text-center">
+                        <div class="text-2xl md:text-3xl font-bold">98%</div>
+                        <div class="text-sm opacity-80">用户好评率</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-light to-transparent"></div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <!-- 价格对比部分 -->
+        <section class="mb-16 scroll-mt-20" id="price-comparison">
+            <div class="text-center mb-8">
+                <h2 class="text-[clamp(1.5rem,3vw,2.25rem)] font-bold mb-3">真实价格对比</h2>
+                <p class="text-gray-medium max-w-2xl mx-auto">同样的产品，不同的购买方式，价格差异高达500元！</p>
+            </div>
+            
+            <div class="bg-white rounded-2xl shadow-ios p-6 md:p-8 overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full min-w-[600px]">
+                        <thead>
+                            <tr class="border-b-2 border-gray-light">
+                                <th class="py-4 px-4 text-left text-gray-medium font-semibold">平板型号</th>
+                                <th class="py-4 px-4 text-center text-gray-medium font-semibold">官网原价</th>
+                                <th class="py-4 px-4 text-center text-gray-medium font-semibold">普通优惠价</th>
+                                <th class="py-4 px-4 text-center text-gray-medium font-semibold">全套优惠价</th>
+                                <th class="py-4 px-4 text-center text-gray-medium font-semibold">节省金额</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-light hover:bg-light/50 transition-ios">
+                                <td class="py-4 px-4 font-medium">小新 Pad Pro GT</td>
+                                <td class="py-4 px-4 text-center">¥2,499</td>
+                                <td class="py-4 px-4 text-center">¥2,299</td>
+                                <td class="py-4 px-4 text-center font-bold text-primary">¥1,999</td>
+                                <td class="py-4 px-4 text-center font-bold text-danger">¥500</td>
+                            </tr>
+                            <tr class="border-b border-gray-light hover:bg-light/50 transition-ios">
+                                <td class="py-4 px-4 font-medium">Yoga Pad Pro</td>
+                                <td class="py-4 px-4 text-center">¥3,499</td>
+                                <td class="py-4 px-4 text-center">¥3,199</td>
+                                <td class="py-4 px-4 text-center font-bold text-primary">¥2,899</td>
+                                <td class="py-4 px-4 text-center font-bold text-danger">¥600</td>
+                            </tr>
+                            <tr class="border-b border-gray-light hover:bg-light/50 transition-ios">
+                                <td class="py-4 px-4 font-medium">拯救者 Y700</td>
+                                <td class="py-4 px-4 text-center">¥2,999</td>
+                                <td class="py-4 px-4 text-center">¥2,799</td>
+                                <td class="py-4 px-4 text-center font-bold text-primary">¥2,549</td>
+                                <td class="py-4 px-4 text-center font-bold text-danger">¥450</td>
+                            </tr>
+                            <tr class="hover:bg-light/50 transition-ios">
+                                <td class="py-4 px-4 font-medium">小新 Pad 2024</td>
+                                <td class="py-4 px-4 text-center">¥1,599</td>
+                                <td class="py-4 px-4 text-center">¥1,499</td>
+                                <td class="py-4 px-4 text-center font-bold text-primary">¥1,299</td>
+                                <td class="py-4 px-4 text-center font-bold text-danger">¥300</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="mt-6 p-4 bg-primary/5 rounded-xl border border-primary/20">
+                    <p class="text-sm text-primary"><i class="fa fa-info-circle mr-1"></i> 注：全套优惠价 = 官网原价 - 学生优惠 - 国补 - 淘金币抵扣 - 省钱卡优惠 - 一淘返利，实际金额可能因活动略有波动。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 用户案例展示 -->
+        <section class="mb-16 scroll-mt-20" id="user-cases">
+            <div class="text-center mb-8">
+                <h2 class="text-[clamp(1.5rem,3vw,2.25rem)] font-bold mb-3">真实用户反馈</h2>
+                <p class="text-gray-medium max-w-2xl mx-auto">看看其他用户如何通过本指南省钱购买</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 案例1 -->
+                <div class="bg-white rounded-2xl shadow-ios overflow-hidden card-hover">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://picsum.photos/id/20/600/400" alt="用户订单截图" class="w-full h-full object-cover transition-ios hover:scale-105">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <div class="text-yellow-400 flex">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <span class="ml-2 text-sm text-gray-medium">5.0</span>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">张先生 - 小新 Pad Pro GT</h3>
+                        <p class="text-gray-medium mb-4 text-sm">按照指南一步步操作，真的省了500元！学生认证很顺利，客服也很配合备注优惠码。</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-primary font-bold">实付 ¥1,999</span>
+                            <span class="text-xs bg-success/10 text-success px-2 py-1 rounded-full">已确认收货</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 案例2 -->
+                <div class="bg-white rounded-2xl shadow-ios overflow-hidden card-hover">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://picsum.photos/id/21/600/400" alt="用户订单截图" class="w-full h-full object-cover transition-ios hover:scale-105">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <div class="text-yellow-400 flex">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <span class="ml-2 text-sm text-gray-medium">5.0</span>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">李同学 - Yoga Pad Pro</h3>
+                        <p class="text-gray-medium mb-4 text-sm">作为学生党真的很需要这种省钱攻略，P图认证一次过，返利也到账了，太给力了！</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-primary font-bold">实付 ¥2,899</span>
+                            <span class="text-xs bg-success/10 text-success px-2 py-1 rounded-full">已确认收货</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 案例3 -->
+                <div class="bg-white rounded-2xl shadow-ios overflow-hidden card-hover">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://picsum.photos/id/22/600/400" alt="用户订单截图" class="w-full h-full object-cover transition-ios hover:scale-105">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <div class="text-yellow-400 flex">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-half-o"></i>
+                            </div>
+                            <span class="ml-2 text-sm text-gray-medium">4.5</span>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">王女士 - 拯救者 Y700</h3>
+                        <p class="text-gray-medium mb-4 text-sm">一开始还担心麻烦，没想到步骤很清晰，淘金币攒起来也不难，5元也顺利退回来了，推荐！</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-primary font-bold">实付 ¥2,549</span>
+                            <span class="text-xs bg-success/10 text-success px-2 py-1 rounded-full">已确认收货</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 省钱步骤 -->
+        <section class="mb-16 scroll-mt-20" id="steps">
+            <div class="text-center mb-10">
+                <h2 class="text-[clamp(1.5rem,3vw,2.25rem)] font-bold mb-3">五步省钱法</h2>
+                <p class="text-gray-medium max-w-2xl mx-auto">跟着步骤操作，轻松省下几百元，每一步都有明确的省钱金额</p>
+                
+                <!-- 步骤进度条 -->
+                <div class="max-w-3xl mx-auto mt-8">
+                    <div class="flex justify-between mb-2">
+                        <span class="text-xs text-gray-medium">开始</span>
+                        <span class="text-xs text-gray-medium">完成</span>
+                    </div>
+                    <div class="h-2 bg-gray-light rounded-full overflow-hidden">
+                        <div id="steps-progress" class="h-full bg-primary rounded-full w-[20%] transition-ios"></div>
+                    </div>
+                    <div class="flex justify-between mt-2">
+                        <span class="text-xs font-medium" id="current-step-text">步骤 1/5</span>
+                        <span class="text-xs text-gray-medium">预计节省 ¥500+</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 步骤容器 -->
+            <div class="max-w-3xl mx-auto">
+                <!-- 步骤1：学生认证 -->
+                <div class="step-container step-active" data-step="1">
+                    <div class="bg-white rounded-2xl shadow-ios p-6 md:p-8 mb-8 relative overflow-hidden">
+                        <div class="absolute -right-6 -top-6 w-24 h-24 bg-primary/10 rounded-full"></div>
+                        
+                        <div class="flex items-start mb-6">
+                            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg mr-4">1</div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-1">学生认证</h3>
+                                <div class="inline-flex items-center bg-primary/10 text-primary text-sm px-3 py-1 rounded-full">
+                                    <i class="fa fa-money mr-1"></i> 省 ¥200
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="pl-14">
+                            <p class="mb-4 text-gray-medium">学生认证是最核心的优惠，联想对学生用户有专属折扣，必须完成！</p>
+                            
+                            <div class="mb-6">
+                                <h4 class="font-bold mb-2 flex items-center">
+                                    <i class="fa fa-check-circle text-success mr-2"></i> 认证方法
+                                </h4>
+                                <ul class="list-disc pl-6 text-gray-medium space-y-2">
+                                    <li>我将为您提供北京大学录取通知书P图服务（替换成您的姓名）</li>
+                                    <li>认证仅需此P图文件，无需学生证或学信网验证</li>
+                                    <li>提交后24小时内审核通过，通过率90%+</li>
+                                    <li>若审核失败，我会免费为您重新制作P图</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <h4 class="font-bold mb-2 flex items-center">
+                                    <i class="fa fa-exclamation-circle text-secondary mr-2"></i> 注意事项
+                                </h4>
+                                <ul class="list-disc pl-6 text-gray-medium space-y-2">
+                                    <li>请提供您的真实姓名，用于P图制作</li>
+                                    <li>认证成功后有效期为1年，期间可多次使用</li>
+                                    <li>此认证适用于联想全系列产品，不限于平板</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-light rounded-xl p-4 mb-6">
+                                <div class="flex items-start">
+                                    <i class="fa fa-lightbulb-o text-secondary text-xl mt-1 mr-3"></i>
+                                    <div>
+                                        <h4 class="font-bold mb-1">小贴士</h4>
+                                        <p class="text-sm text-gray-medium">很多用户担心P图会被发现，实际上联想的学生认证审核并不严格，我们已帮助100+用户成功通过，至今没有被拒的案例。</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center mt-6">
+                                <input type="checkbox" id="check1" class="w-5 h-5 rounded border-gray-medium text-primary focus:ring-primary">
+                                <label for="check1" class="ml-2 text-gray-medium">我已了解学生认证流程并准备好姓名</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 步骤2：淘金币积累 -->
+                <div class="step-container hidden" data-step="2">
+                    <div class="bg-white rounded-2xl shadow-ios p-6 md:p-8 mb-8 relative overflow-hidden">
+                        <div class="absolute -right-6 -top-6 w-24 h-24 bg-primary/10 rounded-full"></div>
+                        
+                        <div class="flex items-start mb-6">
+                            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg mr-4">2</div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-1">淘金币积累</h3>
+                                <div class="inline-flex items-center bg-primary/10 text-primary text-sm px-3 py-1 rounded-full">
+                                    <i class="fa fa-money mr-1"></i> 省 ¥159
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="pl-14">
+                            <p class="mb-4 text-gray-medium">淘金币可直接抵扣现金，15900个淘金币可抵扣159元，是重要的省钱项！</p>
+                            
+                            <div class="mb-6">
+                                <h4 class="font-bold mb-2 flex items-center">
+                                    <i class="fa fa-check-circle text-success mr-2"></i> 快速积累方法
+                                </h4>
+                                <ul class="list-disc pl-6 text-gray-medium space-y-2">
+                                    <li>淘宝首页点击"淘金币"入口，每日签到可得5-20个金币</li>
+                                    <li>浏览推荐商品（30秒/个），每个可得10-15个金币，每天可做10个</li>
+                                    <li>分享商品给好友，每次可得10个金币，每天限5次</li>
+                                    <li>玩"金币庄园"小游戏，每日可额外获得50-100个金币</li>
+                                    <li>购物评价也能获得金币，10-50个不等</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <h4 class="font-bold mb-2 flex items-center">
+                                    <i class="fa fa-clock-o text-secondary mr-2"></i> 时间规划
+                                </h4>
+                                <p class="text-gray-medium mb-2">按照上述方法，每天只需10分钟，约7-10天即可积累15900个金币：</p>
+                                <div class="bg-light rounded-lg p-3">
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-sm">每日可获得金币</span>
+                                        <span class="text-sm font-medium">约2000个</span>
+                                    </div>
+                                    <div class="w-full bg-gray-light rounded-full h-2 mb-1">
+                                        <div class="bg-primary h-2 rounded-full" style="width: 60%"></div>
+                                    </div>
+                                    <div class="flex justify-between text-xs text-gray-medium">
+                                        <span>当前进度</span>
+                                        <span>目标：15900个</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center mt-6">
+                                <input type="checkbox" id="check2" class="w-5 h-5 rounded border-gray-medium text-primary focus:ring-primary">
+                                <label for="check2" class="ml-2 text-gray-medium">我已了解淘金币积累方法</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 步骤3：淘宝省钱卡 -->
+                <div class="step-container hidden" data-step="3">
+                    <div class="bg-white rounded-2xl shadow-ios p-6 md:p-8 mb-8 relative overflow-hidden">
+                        <div class="absolute -right-6 -top-6 w-24 h-24 bg-primary/10 rounded-full"></div>
+                        
+                        <div class="flex items-start mb-6">
+                            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg mr-4">3</div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-1">淘宝省钱卡</h3>
+                                <div class="inline-flex items-center bg-primary/10 text-primary text-sm px-3 py-1 rounded-full">
+                                    <i class="fa fa-money mr-1"></i> 省 ¥50-60
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="pl-14">
+                            <p class="mb-4 text-gray-medium">淘宝省钱卡是性价比极高的优惠，花几毛钱甚至几分钱开通，就能省几十元！</p>
+                            
+                            <div class="mb-6">
+                                <h4 class="font-bold mb-2 flex items-center">
+                                    <i class="fa fa-check-circle text-success mr-2"></i> 最优开通方案
+                                </h4>
+                                <div class="overflow-x-auto">
+                                    <table class="w-full min-w-[400px] text-sm">
+                                        <thead>
+                                            <tr class="bg-light">
+                                                <th class="py-2 px-3 text-left rounded-l-lg">套餐类型</th>
+                                                <th class="py-2 px-3 text-center">开通费</th>
+                                                <th class="py-2 px-3 text-center">总优惠额度</th>
+                                                <th class="py-2 px-3 text-center rounded-r-lg">推荐指数</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="border-b border-gray-light">
+                                                <td class="py-2 px-3">入门超值版</td>
+                                                <td class="py-2 px-3 text-center">¥0.1-5元</td>
+                                                <td class="py-2 px-3 text-center">¥50-60</td>
+                                                <td class="py-2 px-3 text-center text-success">★★★★★</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="py-2 px-3">高级版</td>
+                                                <td class="py-2 px-3 text-center">¥39元</td>
+                                                <td class="py-2 px-3 text-center">¥120-150</td>
+                                                <td class="py-2 px-3 text-center text-gray-medium">★★☆☆☆</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <h4 class="font-bold mb-2 flex items-center">
+                                    <i class="fa fa-map-marker text-secondary mr-2"></i> 开通入口
+                                </h4>
+                                <ul class="list-disc pl-6 text-gray-medium space-y-2">
+                                    <li>打开淘宝APP，首页搜索"省钱卡"</li>
+                                    <li>进入后会显示当前可开通的套餐（不同账号可能不同）</li>
+                                    <li>选择开通费0.1-5元的套餐，点击开通并支付</li>
+                                    <li>开通后在"我的优惠券"中可查看可用的省钱卡券</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="flex items-center mt-6">
+                                <input type="checkbox" id="check3" class="w-5 h-5 rounded border-gray-medium text-primary focus:ring-primary">
+                                <label for="check3" class="ml-2 text-gray-medium">我已了解省钱卡开通技巧</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 步骤4：一淘返利 -->
+                <div class="step-container hidden" data-step="4">
+                    <div class="bg-white rounded-2xl shadow-ios p-6 md:p-8 mb-8 relative overflow-hidden">
+                        <div class="absolute -right-6 -top-6 w-24 h-24 bg-primary/10 rounded-full"></div>
+                        
+                        <div class="flex items-start mb-6">
+                            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg mr-4">4</div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-1">一淘返利</h3>
+                                <div class="inline-flex items-center bg-primary/10 text-primary text-sm px-3 py-1 rounded-full">
+                                    <i class="fa fa-money mr-1"></i> 省 ¥20-30
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="pl-14">
+                            <p class="mb-4 text-gray-medium">一淘是淘宝官方的返利APP，通过一淘下单可额外获得20-30元返利，相当于白捡钱！</p>
+                            
+                            <div class="mb-6">
+                                <h4 class="font-bold mb-2 flex items-center">
+                                    <i class="fa fa-check-circle text-success mr-2"></i> 操作流程
+                                </h4>
+                                <div class="space-y-4">
+                                    <div class="flex">
+                                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold mr-3">1</div>
+                                        <div>
+                                            <p class="font-medium">下载并安装一淘APP</p>
+                                            <p class="text-sm text-gray-medium">在应用商店搜索"一淘"下载，或通过淘宝APP内的"返利"入口进入</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex">
+                                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold mr-3">2</div>
+                                        <div>
+                                            <p class="font-medium">登录账号</p>
+                                            <p class="text-sm text-gray-medium">使用你的淘宝账号直接登录，确保与购物账号一致</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex">
+                                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold mr-3">3</div>
+                                        <div>
+                                            <p class="font-medium">搜索商品</p>
+                                            <p class="text-sm text-gray-medium">在一淘搜索"联想官方旗舰店"，找到你要购买的平板</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex">
+                                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold mr-3">4</div>
+                                        <div>
+                                            <p class="font-medium">下单购买</p>
+                                            <p class="text-sm text-gray-medium">点击"购买"按钮，会自动跳转到淘宝APP，按正常流程下单即可</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex">
+                                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold mr-3">5</div>
+                                        <div>
+                                            <p class="font-medium">获取返利</p>
+                                            <p class="text-sm text-gray-medium">确认收货后，返利会自动到账一淘账户，可直接提现到支付宝</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center mt-6">
+                                <input type="checkbox" id="check4" class="w-5 h-5 rounded border-gray-medium text-primary focus:ring-primary">
+                                <label for="check4" class="ml-2 text-gray-medium">我已了解一淘返利流程</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 步骤5：国补领取 -->
+                <div class="step-container hidden" data-step="5">
+                    <div class="bg-white rounded-2xl shadow-ios p-6 md:p-8 mb-8 relative overflow-hidden">
+                        <div class="absolute -right-6 -top-6 w-24 h-24 bg-primary/10 rounded-full"></div>
+                        
+                        <div class="flex items-start mb-6">
+                            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg mr-4">5</div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-1">国补领取</h3>
+                                <div class="inline-flex items-center bg-primary/10 text-primary text-sm px-3 py-1 rounded-full">
+                                    <i class="fa fa-money mr-1"></i> 省 ¥50-150
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="pl-14">
+                            <p class="mb-4 text-gray-medium">国补是政府发放的消费补贴，可与所有其他优惠叠加使用，是最优先的优惠！</p>
+                            
+                            <div class="mb-6">
+                                <h4 class="font-bold mb-2 flex items-center">
+                                    <i class="fa fa-check-circle text-success mr-2"></i> 领取方法
+                                </h4>
+                                <ul class="list-disc pl-6 text-gray-medium space-y-2">
+                                    <li>打开淘宝APP，首页搜索"国补"进入补贴专区</li>
+                                    <li>在专区内找到"数码家电"分类，点击进入</li>
+                                    <li>找到对应品牌和型号的平板，领取国补券（通常有满1000-100、满1500-150等）</li>
+                                    <li>领取后有效期为3天，请在有效期内使用</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="mb-8">
+                                <h4 class="font-bold mb-3">专属优惠码（务必备注）</h4>
+                                <div class="bg-primary/5 border border-primary/20 rounded-xl p-4 text-center">
+                                    <div class="text-3xl font-bold text-primary tracking-wider mb-2" id="coupon-code">K6YUQWL4AX</div>
+                                    <p class="text-sm text-gray-medium">请在下单时联系客服手动备注此优惠码，否则无法获得返利</p>
+                                </div>
+                                
+                                <div class="mt-4 p-4 bg-secondary/10 border border-secondary/20 rounded-xl">
+                                    <h5 class="font-bold mb-2 flex items-center text-secondary">
+                                        <i class="fa fa-info-circle mr-2"></i> 退款说明
+                                    </h5>
+                                    <p class="text-sm text-gray-medium">
+                                        您支付的5元将在确认收货7天内退还：
+                                    </p>
+                                    <ol class="list-decimal pl-6 text-sm text-gray-medium mt-2 space-y-1">
+                                        <li>收到平板并确认收货</li>
+                                        <li>截取包含客服备注优惠码的聊天记录</li>
+                                        <li>发送截图给我，我将立即退还5元</li>
+                                    </ol>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center mt-6">
+                                <input type="checkbox" id="check5" class="w-5 h-5 rounded border-gray-medium text-primary focus:ring-primary">
+                                <label for="check5" class="ml-2 text-gray-medium">我已了解所有流程并记录优惠码</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 步骤导航按钮 -->
+                <div class="flex justify-between">
+                    <button id="prev-btn" class="px-6 py-3 bg-white border border-gray-light rounded-xl text-gray-medium font-medium shadow-sm scale-ios hidden">
+                        <i class="fa fa-arrow-left mr-2"></i> 上一步
+                    </button>
+                    <div class="ml-auto">
+                        <button id="next-btn" class="px-8 py-3 bg-primary text-white rounded-xl font-medium shadow-ios scale-ios disabled:bg-gray-light disabled:cursor-not-allowed" disabled>
+                            下一步 <i class="fa fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 常见问题 -->
+        <section class="mb-16 scroll-mt-20" id="faq">
+            <div class="text-center mb-8">
+                <h2 class="text-[clamp(1.5rem,3vw,2.25rem)] font-bold mb-3">常见问题</h2>
+                <p class="text-gray-medium max-w-2xl mx-auto">解答您可能遇到的疑问</p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto">
+                <div class="space-y-4">
+                    <!-- 问题1 -->
+                    <div class="bg-white rounded-2xl shadow-ios overflow-hidden">
+                        <button class="faq-toggle w-full text-left p-6 focus:outline-none flex justify-between items-center">
+                            <span class="font-bold">学生认证失败了怎么办？</span>
+                            <i class="fa fa-chevron-down text-gray-medium transition-ios"></i>
+                        </button>
+                        <div class="faq-content hidden px-6 pb-6">
+                            <p class="text-gray-medium">如果学生认证失败，我会免费为您重新制作P图，调整细节后再次提交。根据我们的经验，第二次提交的通过率接近100%。至今我们帮助的100+用户中，只有2位需要第二次提交，最终都成功通过。</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 问题2 -->
+                    <div class="bg-white rounded-2xl shadow-ios overflow-hidden">
+                        <button class="faq-toggle w-full text-left p-6 focus:outline-none flex justify-between items-center">
+                            <span class="font-bold">所有联想平板都能享受这些优惠吗？</span>
+                            <i class="fa fa-chevron-down text-gray-medium transition-ios"></i>
+                        </button>
+                        <div class="faq-content hidden px-6 pb-6">
+                            <p class="text-gray-medium">是的，本指南适用于联想全系列平板产品，包括但不限于小新Pad系列、Yoga Pad系列、拯救者系列等。不同型号的优惠力度可能略有差异，但整体流程完全相同。</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 问题3 -->
+                    <div class="bg-white rounded-2xl shadow-ios overflow-hidden">
+                        <button class="faq-toggle w-full text-left p-6 focus:outline-none flex justify-between items-center">
+                            <span class="font-bold">淘金币不够怎么办？</span>
+                            <i class="fa fa-chevron-down text-gray-medium transition-ios"></i>
+                        </button>
+                        <div class="faq-content hidden px-6 pb-6">
+                            <p class="text-gray-medium">如果淘金币不足15900个，可以适当减少抵扣金额，比如10000个金币可抵扣100元。另外，您也可以邀请家人朋友帮忙积累，或者延长几天再购买，每天坚持做任务很快就能攒够。</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 问题4 -->
+                    <div class="bg-white rounded-2xl shadow-ios overflow-hidden">
+                        <button class="faq-toggle w-full text-left p-6 focus:outline-none flex justify-between items-center">
+                            <span class="font-bold">优惠码忘记备注了还有补救办法吗？</span>
+                            <i class="fa fa-chevron-down text-gray-medium transition-ios"></i>
+                        </button>
+                        <div class="faq-content hidden px-6 pb-6">
+                            <p class="text-gray-medium">如果下单时忘记备注优惠码，在发货前可以联系客服补充备注。如果已经发货，很抱歉将无法获得返利，也无法退还5元费用。所以请务必在下单时确认已经备注优惠码，并截图保存聊天记录。</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 问题5 -->
+                    <div class="bg-white rounded-2xl shadow-ios overflow-hidden">
+                        <button class="faq-toggle w-full text-left p-6 focus:outline-none flex justify-between items-center">
+                            <span class="font-bold">国补活动真的只有3天了吗？</span>
+                            <i class="fa fa-chevron-down text-gray-medium transition-ios"></i>
+                        </button>
+                        <div class="faq-content hidden px-6 pb-6">
+                            <p class="text-gray-medium">根据官方通知，本次国补活动确实将在3天后结束。国补是优惠力度最大的补贴之一，错过后可能需要等很久才有类似活动。建议您尽快按照指南操作，以免错过最佳购买时机。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 底部行动区 -->
+        <section class="mb-16">
+            <div class="max-w-3xl mx-auto bg-gradient-to-r from-primary to-primary/80 rounded-3xl p-8 text-white relative overflow-hidden shadow-ios">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32"></div>
+                <div class="absolute bottom-0 left-0 w-40 h-40 bg-white/10 rounded-full -ml-20 -mb-20"></div>
+                
+                <div class="relative z-10">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4 text-center">准备好省钱购买联想平板了吗？</h2>
+                    <p class="text-center mb-8 opacity-90 max-w-xl mx-auto">按照上述步骤操作，最低只需1999元就能带走小新Pad Pro GT，还能获得额外返利！</p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="#steps" class="px-8 py-4 bg-white text-primary font-bold rounded-xl text-center scale-ios shadow-ios">
+                            开始省钱之旅
+                        </a>
+                        <a href="https://s.taobao.com" target="_blank" class="px-8 py-4 bg-transparent border-2 border-white text-white font-bold rounded-xl text-center scale-ios">
+                            前往联想旗舰店
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                    <div class="mb-6 md:mb-0">
+                        <h3 class="text-xl font-bold mb-2">联想平板省钱指南</h3>
+                        <p class="text-gray-400 text-sm">中山大学软件工程学生出品</p>
+                    </div>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-ios">
+                            <i class="fa fa-weixin"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-ios">
+                            <i class="fa fa-weibo"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-ios">
+                            <i class="fa fa-qq"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="border-t border-white/10 pt-8 text-center text-gray-400 text-sm">
+                    <p>© 2024 联想平板省钱指南 | 本指南仅作优惠信息分享，与联想官方无直接关联</p>
+                    <p class="mt-2">注意：此链接为个人专属，禁止分享给他人，否则将无法获得返利和退款</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 倒计时功能
+        function updateCountdown() {
+            const countdownEl = document.getElementById('countdown');
+            let days = parseInt(countdownEl.textContent);
+            if (days > 0) {
+                countdownEl.textContent = days - 1;
+            }
+        }
+        // 每天更新一次倒计时（实际项目中可以调整为真实倒计时）
+        // setInterval(updateCountdown, 86400000);
+        
+        // 步骤导航功能
+        const stepContainers = document.querySelectorAll('.step-container');
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const progressBar = document.getElementById('steps-progress');
+        const currentStepText = document.getElementById('current-step');
+        let currentStep = 1;
+        const totalSteps = stepContainers.length;
+        
+        // 更新步骤显示
+        function updateStepDisplay() {
+            stepContainers.forEach(container => {
+                const step = parseInt(container.dataset.step);
+                if (step === currentStep) {
+                    container.classList.add('step-active');
+                    container.classList.remove('hidden');
+                } else {
+                    container.classList.remove('step-active');
+                    container.classList.add('hidden');
+                }
+            });
+            
+            // 更新进度条
+            progressBar.style.width = `${(currentStep / totalSteps) * 100}%`;
+            currentStepText.textContent = `步骤 ${currentStep}/${totalSteps}`;
+            
+            // 更新按钮状态
+            prevBtn.classList.toggle('hidden', currentStep === 1);
+            nextBtn.textContent = currentStep === totalSteps ? '完成' : '下一步 <i class="fa fa-arrow-right ml-2"></i>';
+            
+            // 重置当前步骤的复选框状态
+            const currentCheckbox = document.getElementById(`check${currentStep}`);
+            if (currentCheckbox) {
+                currentCheckbox.checked = false;
+                nextBtn.disabled = true;
+            }
+        }
+        
+        // 监听复选框变化
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const step = parseInt(this.id.replace('check', ''));
+                if (step === currentStep) {
+                    nextBtn.disabled = !this.checked;
+                }
+            });
+        });
+        
+        // 下一步按钮
+        nextBtn.addEventListener('click', function() {
+            if (currentStep < totalSteps) {
+                currentStep++;
+                updateStepDisplay();
+                
+                // 平滑滚动到步骤区域
+                document.getElementById('steps').scrollIntoView({ behavior: 'smooth' });
+            } else {
+                // 完成所有步骤
+                alert('恭喜您完成了所有步骤！请牢记优惠码并按指引操作，如有任何问题可以随时联系我。');
+            }
+        });
+        
+        // 上一步按钮
+        prevBtn.addEventListener('click', function() {
+            if (currentStep > 1) {
+                currentStep--;
+                updateStepDisplay();
+                
+                // 平滑滚动到步骤区域
+                document.getElementById('steps').scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+        
+        // FAQ 折叠功能
+        const faqToggles = document.querySelectorAll('.faq-toggle');
+        faqToggles.forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                const icon = this.querySelector('i');
+                
+                // 切换内容显示
+                content.classList.toggle('hidden');
+                
+                // 旋转图标
+                if (content.classList.contains('hidden')) {
+                    icon.style.transform = 'rotate(0deg)';
+                } else {
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+        
+        // 优惠码复制功能
+        const couponCode = document.getElementById('coupon-code');
+        couponCode.addEventListener('click', function() {
+            navigator.clipboard.writeText(this.textContent).then(() => {
+                const originalText = this.textContent;
+                this.textContent = '已复制！';
+                setTimeout(() => {
+                    this.textContent = originalText;
+                }, 2000);
+            });
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                document.querySelector(targetId).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // 页面加载完成后的动画
+        window.addEventListener('load', function() {
+            // 为各个部分添加进入动画
+            const sections = document.querySelectorAll('section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fade-in');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            sections.forEach(section => {
+                section.classList.add('opacity-0', 'translate-y-4', 'transition-ios');
+                observer.observe(section);
+            });
+            
+            // 自定义动画类
+            document.head.insertAdjacentHTML('beforeend', `
+                <style>
+                    .animate-fade-in {
+                        opacity: 1 !important;
+                        transform: translateY(0) !important;
+                    }
+                </style>
+            `);
+        });
+    </script>
+</body>
+</html>
+    
