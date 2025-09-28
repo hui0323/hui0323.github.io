@@ -100,6 +100,17 @@
             font-size: 14px;
             color: #ff8f00;
         }
+        /* 新增：着重样式，用于放大备注部分 */
+        .emphasize-note {
+            background-color: #ffebee;
+            border: 2px solid #f44336;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 20px 0;
+            font-size: 16px;
+            font-weight: bold;
+            color: #d50000;
+        }
     </style>
 </head>
 <body>
@@ -117,9 +128,9 @@
             <!-- 仅保留您上传的第二张图片（闪购外卖刷金币图） -->
             <div class="img-box">
                 <!-- 请确保图片命名为「taojinbi-flashbuy-takeaway.jpg」并上传到GitHub的images文件夹 -->
-                <img src="images/taojinbi-flashbuy-takeaway.jpg" alt="淘金币-闪购外卖刷取" title="30元以上外卖返1000金币">" 
-                     alt="淘金币-新方法：闪购外卖无限刷" 
-                     title="红圈处：30元以上闪购外卖入口，标注「返1000金币」">
+                <img src="images/taojinbi-flashbuy-takeaway.jpg" 
+                     alt="淘金币-闪购外卖刷取" 
+                     title="30元以上外卖返1000金币">
             </div>
             <p class="img-note">图：淘金币高效刷取方法（淘宝闪购外卖入口）</p>
             <p class="guide-desc">
@@ -137,9 +148,9 @@
             
             <!-- 省钱卡入口图 -->
             <div class="img-box">
-               <img src="images/shengqianka-entrance.jpg" alt="省钱卡入口" title="我的淘宝-会员中心入口">
-                     alt="淘宝省钱卡入口图" 
-                     title="箭头处为「省钱卡」入口">
+               <img src="images/shengqianka-entrance.jpg" 
+                    alt="省钱卡入口" 
+                    title="我的淘宝-会员中心入口">
             </div>
             <p class="img-note">图：淘宝省钱卡入口（“我的淘宝”→“会员中心”）</p>
             <p class="guide-desc">
@@ -151,7 +162,9 @@
 
             <!-- 复用淘金币刷取图，说明与省钱卡的配合 -->
             <div class="img-box">
-                
+                <img src="images/taojinbi-flashbuy-takeaway.jpg" 
+                     alt="省钱卡配合：淘金币刷取参考" 
+                     title="省钱卡+淘金币叠加抵扣参考">
             </div>
             <p class="img-note">图：省钱卡配合淘金币的刷取参考（确保金币达标）</p>
             <p class="guide-desc">
@@ -159,14 +172,14 @@
             </p>
         </div>
 
-        <!-- 模块3：平板完整购买流程（保留核心步骤，确保逻辑连贯） -->
+        <!-- 模块3：平板完整购买流程（修改学生认证，着重备注部分） -->
         <div class="guide-section">
             <h2 class="section-title">三、平板完整购买流程（5步省最多钱）</h2>
             <div class="flow-step" data-step="1">
                 <p class="guide-desc"><span class="highlight">1. 优先领国补</span>：打开天猫联想旗舰店，搜索对应平板型号（如“小新Pad Pro GT”），在商品详情页找到“国家补贴15%”入口（通常在价格下方），确认补贴后加入购物车；</p>
             </div>
             <div class="flow-step" data-step="2">
-                <p class="guide-desc"><span class="highlight">2. 学生认证</span>：联系我协助完成学生认证（提供p图支持，确保通过率100%），认证后可额外减免200元（所有联想平板型号通用）；</p>
+                <p class="guide-desc"><span class="highlight">2. 学生认证</span>：您可在闲鱼直接搜索「帮过学生认证」，一般花费5-6元即可快速完成认证，认证后可额外减免200元（所有联想平板型号通用）；</p>
             </div>
             <div class="flow-step" data-step="3">
                 <p class="guide-desc"><span class="highlight">3. 一淘返利</span>：下载“一淘APP”，用淘宝账号登录，搜索相同平板型号，浏览商品视频30秒后，从一淘直接跳转至天猫旗舰店（跳转后购买可返利20元左右，确认收货后到账）；</p>
@@ -175,7 +188,10 @@
                 <p class="guide-desc"><span class="highlight">4. 用淘金币+省钱卡</span>：结算页面先勾选“淘金币抵扣”（15900个抵159元），再点击“省钱卡红包”（抵50-120元），两者可叠加使用；</p>
             </div>
             <div class="flow-step" data-step="5">
-                <p class="guide-desc"><span class="highlight">5. 关键备注（必做！）</span>：在订单“备注栏”填写优惠码“XXX”（优惠码请联系我获取），<span class="highlight">未备注则无法享受返利，且我无法获得官方50元京东e卡</span>——备注后截图保存，用于后续退款审核。</p>
+                <!-- 新增着重样式的备注区域 -->
+                <div class="emphasize-note">
+                    <span class="highlight">5. 关键备注（必做！）</span>：在订单“备注栏”填写优惠码 <span style="font-size: 18px; color: #d50000;">K6YUQWL4AX</span> ——<span class="highlight">未备注则无法享受返利，且无法获得官方50元京东e卡</span>！备注后请截图保存，用于后续退款审核。
+                </div>
             </div>
         </div>
 
@@ -208,5 +224,6 @@
     </script>
 </body>
 </html>
+
 
 
