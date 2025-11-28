@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>LUMINA OMEGA | 旗舰版 v4.0</title>
+    
+    <!-- PWA 配置 (新增部分) -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon.png">
+    <meta name="theme-color" content="#0f0f0f">
+    <!-- PWA 配置结束 -->
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;700&family=Oswald:wght@500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-body: #050505;
+            --bg-panel: #0f0f0f;
+            --border: #222;
+            --accent: #ff9500;
+            --text-main: #e0e0e0;
+            --text-muted: #888;
+            --control-bg: #1a1a1a;
+        }
+
+        * { box-sizing: border-box; user-select: none; -webkit-tap-highlight-color: transparent; }
+        
+        body {
+            margin: 0; background-color: var(--bg-body); color: var(--text-main);
+            font-family: 'Inter', sans-serif; height: 100vh; display: flex; flex-direction: column; overflow: hidden;
+        }
+
+        /* ---------------- UI Components ---------------- */
+        
+        header {
+            height: 55px; background: var(--bg-panel); border-bottom: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: space-between; padding: 0 20px;
+        }
+        .brand {
+            font-family: 'Cinzel', serif; font-size: 18px; letter-spacing: 2px; color: #FFF;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .tag {
+            background: var(--accent); color: #000; padding: 2px 6px; font-size: 9px; 
+            font-family: 'JetBrains Mono'; font-weight: bold; border-radius: 2px;
+        }
+        
+        .process-btn {
+            background: transparent; border: 1px solid var(--accent); color: var(--accent);
+            padding: 6px 16px; font-family: 'JetBrains Mono'; font-size: 11px; cursor: pointer;
+            transition: 0.2s; display: flex; align-items: center; gap: 8px;
+        }
+        .process-btn:hover { background: var(--accent); color: #000; box-shadow: 0 0 15px rgba(255, 149, 0, 0.4); }
+
+        .workspace { flex: 1; display: flex; height: calc(100vh - 55px); }
+
+        .sidebar {
+            width: 360px; background: var(--bg-panel); border-right: 1px solid var(--border);
+            display: flex; flex-direction: column; overflow-y: auto;
+        }
+        .sidebar::-webkit-scrollbar { width: 4px; }
+        .sidebar::-webkit-scrollbar-thumb { background: #333; }
+        
+        .panel-group { border-bottom: 1px solid var(--border); }
+        .panel-head {
+            padding: 15px 20px; font-size: 11px; font-weight: 700; letter-spacing: 1px;
+            color: #888; text-transform: uppercase; background: #111;
+        }
+        .panel-body { padding: 20px; }
+
+        .film-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
+        .film-item {
+            background: var(--control-bg); border: 1px solid transparent; padding: 10px;
+            cursor: pointer; transition: 0.2s; position: relative; overflow: hidden;
+        }
+        .film-item:hover { background: #252525; }
+        .film-item.active { border-color: var(--accent); background: #151515; }
+        .film-item.active::after {
+            content: ''; position: absolute; top:0; right:0; width: 0; height: 0;
+            border-style: solid; border-width: 0 12px 12px 0; border-color: transparent var(--accent) transparent transparent;
+        }
+        .f-name { font-family: 'Oswald'; font-size: 13px; color: #ddd; display: block; margin-bottom: 2px; }
+        .f-desc { font-size: 9px; color: #555; display: block; }
+        
+        .slider-wrap { margin-bottom: 18px; }
+        .slider-head { display: flex; justify-content: space-between; font-size: 10px; color: #aaa; margin-bottom: 6px; font-family:'JetBrains Mono'; }
+        input[type="range"] {
+            width: 100%; -webkit-appearance: none; height: 3px; background: #333; outline: none;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none; width: 14px; height: 14px; background: #ccc; border-radius: 0;
+            cursor: pointer; border: 1px solid #000; transition: 0.1s;
+        }
+        input[type="range"]::-webkit-slider-thumb:hover { background: var(--accent); transform: scale(1.1); }
+        
+        .ratio-group { display: flex; gap: 0; border-radius: 4px; overflow: hidden; border: 1px solid #333; margin-bottom: 15px; }
+        .ratio-btn {
+            flex: 1; border: none; border-right: 1px solid #333; background: #1a1a1a; color: #888; 
+            padding: 10px 5px; font-size: 10px; cursor: pointer; font-family: 'JetBrains Mono';
+            transition: 0.2s;
+        }
+        .ratio-btn:last-child { border-right: none; }
+        .ratio-btn:hover { background: #252525; color: #ddd; }
+        .ratio-btn.active { background: var(--accent); color: #000; font-weight: bold; }
+
+        .half-controls {
+            display: none; background: #1a1a1a; padding: 10px; border: 1px dashed #444; margin-bottom: 15px;
+            font-size: 10px; color: #aaa; align-items: center; justify-content: space-between;
+        }
+
+        .viewport {
+            flex: 1; background: #080808; position: relative;
+            display: flex; align-items: center; justify-content: center; overflow: hidden;
+            flex-direction: column;
+        }
+        .viewport::before {
+            content: ''; position: absolute; top:0; left:0; right:0; bottom:0; z-index:0;
+            background-image: linear-gradient(45deg, #111 25%, transparent 25%), linear-gradient(-45deg, #111 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #111 75%), linear-gradient(-45deg, transparent 75%, #111 75%);
+            background-size: 20px 20px; background-position: 0 0, 0 10px, 10px -10px, -10px 0px; opacity: 0.5;
+        }
+
+        canvas { 
+            z-index: 10; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8); 
+            max-width: 90%; max-height: 90%; 
+            transition: 0.05s; 
+            cursor: grab;
+        }
+        canvas:active { cursor: grabbing; }
+        
+        .loading {
+            position: absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index: 99;
+            display: none; align-items: center; justify-content: center; color: var(--accent); font-family: 'JetBrains Mono';
+        }
+        .hint-overlay {
+            position: absolute; bottom: 20px; background: rgba(0,0,0,0.6); padding: 5px 15px; border-radius: 20px;
+            font-size: 10px; font-family: 'JetBrains Mono'; color: #888; pointer-events: none; z-index: 20;
+        }
+        input[type=file] { display: none; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="brand"><i class="fas fa-camera-retro"></i> LUMINA <span class="tag">PRO LAB</span></div>
+    <div style="display:flex; gap:10px;">
+        <div class="process-btn" onclick="document.getElementById('fileInput').click()">
+            <i class="fas fa-folder-open"></i> 导入图片 (A)
+        </div>
+        <button class="process-btn" onclick="app.exportImage()">
+            <i class="fas fa-save"></i> 显影下载
+        </button>
+    </div>
+</header>
+<input type="file" id="fileInput" accept="image/*">
+<input type="file" id="fileInputB" accept="image/*">
+
+<div class="workspace">
+    <aside class="sidebar">
+        
+        <!-- 1. COLOR PROFILE -->
+        <div class="panel-group">
+            <div class="panel-head">FILM STOCK / 胶片库 (10)</div>
+            <div class="panel-body">
+                <div class="film-grid">
+                    <!-- Standard -->
+                    <div class="film-item active" onclick="app.setFilm('std')">
+                        <span class="f-name">STANDARD</span><span class="f-desc">标准 / Reference</span>
+                    </div>
+
+                    <!-- Kodak Series -->
+                    <div class="film-item" onclick="app.setFilm('portra400')">
+                        <span class="f-name" style="color:#ffcc00">PORTRA 400</span><span class="f-desc">人像 / Portrait</span>
+                    </div>
+                    <div class="film-item" onclick="app.setFilm('ektar100')">
+                        <span class="f-name" style="color:#ff5555">EKTAR 100</span><span class="f-desc">风景 / Vivid</span>
+                    </div>
+                    <div class="film-item" onclick="app.setFilm('gold200')">
+                        <span class="f-name" style="color:#e6b800">GOLD 200</span><span class="f-desc">暖阳 / Warm</span>
+                    </div>
+
+                    <!-- Fuji Series -->
+                    <div class="film-item" onclick="app.setFilm('velvia50')">
+                        <span class="f-name" style="color:#00e676">FUJI VELVIA</span><span class="f-desc">反转片 / Slide</span>
+                    </div>
+                    <div class="film-item" onclick="app.setFilm('superia400')">
+                        <span class="f-name" style="color:#69f0ae">SUPERIA 400</span><span class="f-desc">日系 / Greenish</span>
+                    </div>
+
+                    <!-- European / Cinematic -->
+                    <div class="film-item" onclick="app.setFilm('leica_vivid')">
+                        <span class="f-name" style="color:#ff3333">LEICA M</span><span class="f-desc">高反差 / Contrast</span>
+                    </div>
+                    <div class="film-item" onclick="app.setFilm('hassel_nat')">
+                        <span class="f-name" style="color:#ffffff">HASSELBLAD</span><span class="f-desc">自然 / Natural</span>
+                    </div>
+                    <div class="film-item" onclick="app.setFilm('cinestill800')">
+                        <span class="f-name" style="color:#00e5ff">CINE 800T</span><span class="f-desc">电影 / Tungsten</span>
+                    </div>
+
+                    <!-- B&W -->
+                    <div class="film-item" onclick="app.setFilm('ilford_hp5')">
+                        <span class="f-name" style="color:#aaa">ILFORD HP5</span><span class="f-desc">黑白 / B&W</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. DEVELOPMENT -->
+        <div class="panel-group">
+            <div class="panel-head">DEVELOPMENT / 显影控制</div>
+            <div class="panel-body">
+                <div class="slider-wrap">
+                    <div class="slider-head"><span>INTENSITY / 浓度</span><span id="v-int">100%</span></div>
+                    <input type="range" id="p-intensity" min="0" max="150" value="100">
+                </div>
+                <div class="slider-wrap">
+                    <div class="slider-head"><span>EXPOSURE / 曝光补偿</span><span id="v-expo">0</span></div>
+                    <input type="range" id="p-expo" min="-30" max="30" value="0">
+                </div>
+                <div class="slider-wrap">
+                    <div class="slider-head"><span>CONTRAST / 反差</span><span id="v-con">0</span></div>
+                    <input type="range" id="p-con" min="-30" max="30" value="0">
+                </div>
+                <div class="slider-wrap">
+                    <div class="slider-head"><span>TEMPERATURE / 色温</span><span id="v-temp">0</span></div>
+                    <input type="range" id="p-temp" min="-30" max="30" value="0">
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. OPTICS & FX -->
+        <div class="panel-group">
+            <div class="panel-head">OPTICS / 光学质感</div>
+            <div class="panel-body">
+                <div class="slider-wrap">
+                    <div class="slider-head"><span>HALATION / 红色溢光</span><span id="v-halo">0</span></div>
+                    <input type="range" id="p-halo" min="0" max="100" value="0">
+                </div>
+                <div class="slider-wrap">
+                    <div class="slider-head"><span>GRAIN / 胶片颗粒</span><span id="v-grain">20</span></div>
+                    <input type="range" id="p-grain" min="0" max="100" value="20">
+                </div>
+                <div class="slider-wrap">
+                    <div class="slider-head"><span>DUST / 灰尘划痕</span><span id="v-dust">0</span></div>
+                    <input type="range" id="p-dust" min="0" max="100" value="0">
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. FRAME & RATIO -->
+        <div class="panel-group">
+            <div class="panel-head">FRAME & RATIO / 画幅与边框</div>
+            <div class="panel-body">
+                
+                <div class="ratio-group">
+                    <button id="btn-orig" class="ratio-btn active" onclick="app.setRatio('original')">原比例</button>
+                    <button id="btn-135" class="ratio-btn" onclick="app.setRatio(1.5)">135 (3:2)</button>
+                    <button id="btn-xpan" class="ratio-btn" onclick="app.setRatio(2.7)">XPAN</button>
+                    <button id="btn-half" class="ratio-btn" onclick="app.setRatio('half')">半格(17)</button>
+                </div>
+
+                <!-- SPECIAL CONTROL FOR HALF FRAME -->
+                <div id="half-controls" class="half-controls">
+                    <span><i class="fas fa-columns"></i> 双联画模式</span>
+                    <button class="process-btn" style="padding:4px 8px; font-size:9px;" onclick="document.getElementById('fileInputB').click()">
+                        导入右侧 (B)
+                    </button>
+                </div>
+
+                <div class="film-grid" style="margin-top:10px;">
+                    <div class="film-item active" onclick="app.setFrame('none')"><span class="f-name">无边框</span></div>
+                    <div class="film-item" onclick="app.setFrame('rough')">
+                        <span class="f-name" style="color:#ddd">ROUGH</span>
+                        <span class="f-desc">艺术毛边</span>
+                    </div>
+                    <div class="film-item" onclick="app.setFrame('negative')">
+                        <span class="f-name" style="color:#ddd">NEGATIVE</span>
+                        <span class="f-desc">底片扫描</span>
+                    </div>
+                    <div class="film-item" onclick="app.setFrame('polaroid')"><span class="f-name">宝丽来</span></div>
+                </div>
+                <div class="slider-wrap" style="margin-top:15px;">
+                    <div class="slider-head"><span>DATE STAMP / 日期戳</span></div>
+                    <input type="checkbox" id="chk-date" style="width:20px; height:20px;">
+                </div>
+            </div>
+        </div>
+
+    </aside>
+
+    <div class="viewport">
+        <canvas id="mainCanvas"></canvas>
+        <div class="hint-overlay"><i class="fas fa-hand-paper"></i> 拖拽构图 &bull; 滚轮缩放</div>
+        <div class="loading" id="loader">DEVELOPING / 显影中...</div>
+    </div>
+</div>
+
+<script>
+    // --- PWA 注册代码开始 (新增部分) ---
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./sw.js')
+                .then(registration => {
+                    console.log('LUMINA App 注册成功: ', registration.scope);
+                }, err => {
+                    console.log('LUMINA App 注册失败: ', err);
+                });
+        });
+    }
+    // --- PWA 注册代码结束 ---
+
+    class LuminaOmega {
+        constructor() {
+            this.canvas = document.getElementById('mainCanvas');
+            this.ctx = this.canvas.getContext('2d', { willReadFrequently: true });
+            this.workCanvas = document.createElement('canvas'); 
+            this.workCtx = this.workCanvas.getContext('2d');
+            this.loader = document.getElementById('loader');
+            
+            this.sourceImage = null;   
+            this.sourceImageB = null;  
+            
+            this.transform = { x: 0, y: 0, scale: 1 };
+            this.isDragging = false;
+            this.lastPos = { x: 0, y: 0 };
+            
+            this.params = {
+                film: 'std',
+                intensity: 1.0,  
+                exposure: 0, contrast: 0, temp: 0,
+                halo: 0, grain: 20, dust: 0,
+                seed: Math.random(),
+                frame: 'none',
+                ratio: 'original', 
+                renderRatio: 1.5, 
+                dateStamp: false
+            };
+
+            this.initEvents();
+            this.initCanvasInteraction();
+            this.loadPlaceholder();
+        }
+
+        initEvents() {
+            const bind = (id, key, scale=1, suffix='') => {
+                const el = document.getElementById(id);
+                el.addEventListener('input', (e) => {
+                    this.params[key] = parseFloat(e.target.value) * scale;
+                    const label = document.getElementById(id.replace('p-','v-'));
+                    if(label) label.innerText = Math.round(this.params[key]/scale) + suffix;
+                    this.requestRender();
+                });
+            };
+
+            bind('p-intensity', 'intensity', 0.01, '%');
+            bind('p-expo', 'exposure', 1);
+            bind('p-con', 'contrast', 1);
+            bind('p-temp', 'temp', 1);
+            bind('p-halo', 'halo', 1);
+            bind('p-grain', 'grain', 1);
+            bind('p-dust', 'dust', 1);
+            
+            document.getElementById('chk-date').addEventListener('change', e => { 
+                this.params.dateStamp = e.target.checked; 
+                this.requestRender(); 
+            });
+
+            document.getElementById('fileInput').addEventListener('change', e => this.handleUpload(e, 'A'));
+            document.getElementById('fileInputB').addEventListener('change', e => this.handleUpload(e, 'B'));
+        }
+
+        initCanvasInteraction() {
+            this.canvas.addEventListener('mousedown', (e) => {
+                this.isDragging = true;
+                this.lastPos = { x: e.clientX, y: e.clientY };
+                this.canvas.style.cursor = 'grabbing';
+            });
+            window.addEventListener('mousemove', (e) => {
+                if(!this.isDragging) return;
+                const dx = e.clientX - this.lastPos.x;
+                const dy = e.clientY - this.lastPos.y;
+                this.lastPos = { x: e.clientX, y: e.clientY };
+                const scaleX = this.canvas.width / this.canvas.clientWidth;
+                this.transform.x += dx * scaleX;
+                this.transform.y += dy * scaleX;
+                this.render(true); 
+            });
+            window.addEventListener('mouseup', () => {
+                if(this.isDragging) {
+                    this.isDragging = false;
+                    this.canvas.style.cursor = 'grab';
+                    this.requestRender(); 
+                }
+            });
+            this.canvas.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                const delta = e.deltaY > 0 ? 0.95 : 1.05;
+                this.transform.scale *= delta;
+                this.transform.scale = Math.min(Math.max(0.1, this.transform.scale), 5);
+                this.render(true);
+            });
+        }
+
+        handleUpload(e, slot) {
+            const file = e.target.files[0];
+            if(!file) return;
+            this.loader.style.display = 'flex';
+            const reader = new FileReader();
+            reader.onload = evt => {
+                const img = new Image();
+                img.onload = () => { 
+                    if(slot === 'A') {
+                        this.sourceImage = img;
+                        this.transform = { x: 0, y: 0, scale: 1 };
+                        if(this.params.ratio !== 'half') this.setRatio('original');
+                    } else {
+                        this.sourceImageB = img;
+                        this.requestRender();
+                    }
+                };
+                img.src = evt.target.result;
+            }
+            reader.readAsDataURL(file);
+        }
+
+        setFilm(type) {
+            this.params.film = type;
+            document.querySelectorAll('.film-item').forEach(el => el.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            
+            let d = { exposure: 0, contrast: 0, halo: 0, temp: 0, grain: 20 };
+            
+            // Adjusted defaults to prevent overexposure on high contrast films
+            if(type === 'hassel_nat') { d.contrast = 0; }
+            else if(type === 'leica_vivid') { d.contrast = 15; d.grain = 25; d.exposure = -5; } // Reduced base expo
+            else if(type === 'portra400') { d.temp = 5; d.exposure = 2; d.contrast = -5; } 
+            else if(type === 'ektar100') { d.contrast = 15; d.temp = 0; } 
+            else if(type === 'velvia50') { d.contrast = 20; d.temp = -2; d.exposure = -3; } 
+            else if(type === 'superia400') { d.temp = -5; d.grain = 30; } 
+            else if(type === 'cinestill800') { d.halo = 50; d.temp = -10; }
+            else if(type === 'ilford_hp5') { d.contrast = 25; d.grain = 50; d.exposure = -10; } // Reduced base expo significantly
+
+            this.updateUI(d);
+            this.requestRender();
+        }
+        
+        updateUI(vals) {
+            for(let k in vals) {
+                this.params[k] = vals[k];
+                const el = document.getElementById('p-' + (k==='exposure'?'expo':k==='contrast'?'con':k==='halo'?'halo':k));
+                if(el) {
+                    el.value = vals[k];
+                    const label = document.getElementById(el.id.replace('p-','v-'));
+                    if(label) label.innerText = Math.round(vals[k]);
+                }
+            }
+        }
+
+        setFrame(f) { this.params.frame = f; this.requestRender(); }
+        
+        setRatio(r) { 
+            this.params.ratio = r;
+            document.querySelectorAll('.ratio-btn').forEach(b => b.classList.remove('active'));
+            const controls = document.getElementById('half-controls');
+            controls.style.display = 'none';
+
+            if(r === 'original') document.getElementById('btn-orig').classList.add('active');
+            else if(r === 1.5) document.getElementById('btn-135').classList.add('active');
+            else if(r === 2.7) document.getElementById('btn-xpan').classList.add('active');
+            else if(r === 'half') { 
+                document.getElementById('btn-half').classList.add('active');
+                controls.style.display = 'flex'; 
+            }
+            this.requestRender(); 
+        }
+
+        loadPlaceholder() {
+            const c = document.createElement('canvas'); c.width=800; c.height=600;
+            const ctx = c.getContext('2d');
+            ctx.fillStyle = "#222"; ctx.fillRect(0,0,800,600);
+            ctx.fillStyle="#FFF"; ctx.font="30px 'JetBrains Mono'"; ctx.textAlign="center"; 
+            ctx.fillText("READY TO DEVELOP", 400, 300);
+            const img = new Image();
+            img.onload = () => { this.sourceImage = img; this.setRatio('original'); };
+            img.src = c.toDataURL();
+        }
+
+        requestRender() {
+            if(this.timer) clearTimeout(this.timer);
+            this.timer = setTimeout(() => this.render(), 10);
+        }
+
+        render(isInteractive = false) {
+            if(!this.sourceImage) return;
+            if(!isInteractive) this.loader.style.display = 'flex';
+
+            const MAX_SIZE = isInteractive ? 800 : 1500;
+            
+            if(this.params.ratio === 'original') {
+                this.params.renderRatio = this.sourceImage.width / this.sourceImage.height;
+            } else if (this.params.ratio === 'half') {
+                this.params.renderRatio = 1.5; 
+            } else {
+                this.params.renderRatio = this.params.ratio;
+            }
+
+            let contentW, contentH;
+            if (this.params.renderRatio > 1) {
+                contentW = MAX_SIZE; contentH = MAX_SIZE / this.params.renderRatio;
+            } else {
+                contentH = MAX_SIZE; contentW = MAX_SIZE * this.params.renderRatio;
+            }
+            
+            let padW = 0, padH = 0;
+            if(this.params.frame === 'polaroid') { padW=60; padH=180; }
+            else if(this.params.frame === 'rough' || this.params.frame === 'negative') { padW=100; padH=100; }
+
+            this.canvas.width = contentW + padW;
+            this.canvas.height = contentH + padH;
+            const w = this.canvas.width; const h = this.canvas.height;
+            const ctx = this.ctx;
+
+            ctx.fillStyle = "#111";
+            if(this.params.frame === 'polaroid') ctx.fillStyle = "#f4f4f4";
+            ctx.fillRect(0,0,w,h);
+
+            this.workCanvas.width = contentW;
+            this.workCanvas.height = contentH;
+            this.workCtx.clearRect(0,0,contentW, contentH);
+
+            if(this.params.ratio === 'half') {
+                this.renderHalfFrame(contentW, contentH);
+            } else {
+                this.renderSingleFrame(this.sourceImage, contentW, contentH);
+            }
+
+            const imageData = this.workCtx.getImageData(0, 0, contentW, contentH);
+            this.applyColorEngine(imageData); 
+            this.workCtx.putImageData(imageData, 0, 0);
+
+            const dx = (w - contentW)/2;
+            const dy = (this.params.frame==='polaroid') ? 50 : (h - contentH)/2;
+            ctx.drawImage(this.workCanvas, dx, dy, contentW, contentH);
+
+            if(this.params.halo > 0) this.applyHalation(ctx, dx, dy, contentW, contentH);
+            if(this.params.grain > 0) this.drawGrain(ctx, dx, dy, contentW, contentH, this.params.grain);
+            if(this.params.dust > 0) this.drawDust(ctx, dx, dy, contentW, contentH, this.params.dust);
+            
+            if(this.params.frame === 'rough' || this.params.frame === 'negative') {
+                this.drawProceduralBorder(ctx, dx, dy, contentW, contentH, this.params.frame);
+            }
+
+            if(this.params.dateStamp) this.drawDate(ctx, dx+contentW-30, dy+contentH-30);
+            
+            if(!isInteractive) this.loader.style.display = 'none';
+        }
+
+        renderSingleFrame(img, w, h) {
+            this.workCtx.save();
+            this.workCtx.translate(w/2, h/2);
+            this.workCtx.translate(this.transform.x, this.transform.y);
+            this.workCtx.scale(this.transform.scale, this.transform.scale);
+            const sRatio = img.width / img.height;
+            const tRatio = w / h;
+            let drawW, drawH;
+            if(sRatio > tRatio) { drawH = h; drawW = drawH * sRatio; }
+            else { drawW = w; drawH = drawW / sRatio; }
+            this.workCtx.drawImage(img, -drawW/2, -drawH/2, drawW, drawH);
+            this.workCtx.restore();
+        }
+
+        renderHalfFrame(w, h) {
+            this.workCtx.fillStyle = "#000";
+            this.workCtx.fillRect(0,0,w,h);
+            const gap = w * 0.04; 
+            const slotW = (w - gap) / 2;
+            
+            this.workCtx.save();
+            this.workCtx.beginPath();
+            this.workCtx.rect(0, 0, slotW, h);
+            this.workCtx.clip();
+            this.renderSingleFrame(this.sourceImage, slotW, h);
+            this.workCtx.restore();
+
+            this.workCtx.save();
+            this.workCtx.beginPath();
+            this.workCtx.rect(slotW + gap, 0, slotW, h);
+            this.workCtx.clip();
+            this.workCtx.translate(slotW + gap, 0); 
+            const targetImg = this.sourceImageB ? this.sourceImageB : this.sourceImage;
+            
+            this.workCtx.translate(slotW/2, h/2);
+            this.workCtx.translate(this.transform.x, this.transform.y);
+            this.workCtx.scale(this.transform.scale, this.transform.scale);
+            const sRatio = targetImg.width / targetImg.height;
+            const tRatio = slotW / h;
+            let drawW, drawH;
+            if(sRatio > tRatio) { drawH = h; drawW = drawH * sRatio; }
+            else { drawW = slotW; drawH = drawW / sRatio; }
+            this.workCtx.drawImage(targetImg, -drawW/2, -drawH/2, drawW, drawH);
+            this.workCtx.restore();
+        }
+
+        applyColorEngine(imageData) {
+            const data = imageData.data;
+            const { intensity, exposure, contrast, temp, film } = this.params;
+            const smoothstep = (min, max, value) => {
+                let x = Math.max(0, Math.min(1, (value - min) / (max - min)));
+                return x * x * (3 - 2 * x);
+            };
+            const contrastFactor = (259 * (contrast + 255)) / (255 * (259 - contrast));
+
+            for(let i=0; i<data.length; i+=4) {
+                let r = data[i], g = data[i+1], b = data[i+2];
+                let origR = r, origG = g, origB = b;
+                
+                if(r===0 && g===0 && b===0) continue; 
+
+                // 1. Base Exposure & Temp
+                if(exposure > 0) { let fac = 1 + exposure/30; r = 255 - (255 - r)/fac; g = 255 - (255 - g)/fac; b = 255 - (255 - b)/fac; }
+                else { let fac = 1 - exposure/40; r /= fac; g /= fac; b /= fac; }
+                r += temp; b -= temp;
+                
+                let luma = 0.299*r + 0.587*g + 0.114*b;
+
+                // 2. FILM SIMULATION MATH
+                if(film === 'portra400') {
+                    r = r * 1.05; g = g * 1.02; b = b * 0.98;
+                    let shadow = 1.0 - smoothstep(0, 100, luma); 
+                    b += shadow * 5; r += shadow * 5; 
+                }
+                else if(film === 'ektar100') {
+                    let max = Math.max(r,g,b); let boost = 1.3 - ((max-Math.min(r,g,b))/255)*0.3; 
+                    let avg = (r+g+b)/3; r = avg + (r-avg)*boost; g = avg + (g-avg)*boost; b = avg + (b-avg)*boost;
+                    let shadow = 1.0 - smoothstep(20, 150, luma); b += shadow * 15; g += shadow * 5; 
+                }
+                else if(film === 'gold200') {
+                    let highlight = smoothstep(100, 255, luma); r += highlight * 10; g += highlight * 5; b *= 0.94; 
+                }
+                else if(film === 'velvia50') {
+                    r = (r-10)*1.1; g = (g-10)*1.1; b = (b-10)*1.1; 
+                    let avg = (r+g+b)/3;
+                    r = avg + (r-avg)*1.25; g = avg + (g-avg)*1.25; b = avg + (b-avg)*1.25; 
+                    r *= 1.05; g *= 0.95; b *= 1.05; 
+                }
+                else if(film === 'superia400') {
+                    let shadow = 1.0 - smoothstep(0, 120, luma);
+                    g += shadow * 10; r += smoothstep(150, 255, luma) * 5; 
+                }
+                else if(film === 'leica_vivid') {
+                    // FIX: Soft clip before contrast boost to prevent blowout
+                    if(luma > 200) { let rec = (luma - 200) * 0.3; r -= rec; g -= rec; b -= rec; }
+                    r = (r-128)*1.15 + 128; g = (g-128)*1.15 + 128; b = (b-128)*1.15 + 128;
+                    r *= 1.05; g *= 0.95;
+                    let shadow = 1.0 - smoothstep(0, 120, luma); b += shadow * 10;
+                }
+                else if(film === 'hassel_nat') {
+                    if(luma > 200) { let rec = (luma - 200) * 0.1; r -= rec; g -= rec; b -= rec; }
+                }
+                else if(film === 'cinestill800') {
+                    let shadow = 1.0 - smoothstep(0, 150, luma); b += shadow * 20;
+                    let highlight = smoothstep(150, 255, luma); r += highlight * 10;
+                    r = r*0.95+5; g = g*0.95+5; b = b*0.95+10; 
+                }
+                else if(film === 'ilford_hp5') {
+                    // FIX: Pre-darken to handle high contrast curve
+                    r *= 0.92; g *= 0.92; b *= 0.92;
+                    // Yellow filter logic (blue becomes darker)
+                    let bw = r * 0.4 + g * 0.5 + b * 0.1; 
+                    // S-Curve Contrast
+                    r = (bw - 128) * 1.2 + 128; g = r; b = r;
+                }
+
+                if(contrast !== 0) {
+                     r = contrastFactor * (r - 128) + 128; g = contrastFactor * (g - 128) + 128; b = contrastFactor * (b - 128) + 128;
+                }
+                r = Math.min(255, Math.max(0, r)); g = Math.min(255, Math.max(0, g)); b = Math.min(255, Math.max(0, b));
+                
+                data[i] = origR + (r - origR) * intensity;
+                data[i+1] = origG + (g - origG) * intensity;
+                data[i+2] = origB + (b - origB) * intensity;
+            }
+        }
+
+        applyHalation(ctx, x, y, w, h) {
+            ctx.save(); ctx.globalCompositeOperation = 'lighten';
+            ctx.filter = `blur(${this.params.halo/3}px) saturate(400%) contrast(150%) sepia(100%) hue-rotate(-50deg) opacity(${this.params.halo/150})`;
+            ctx.drawImage(this.workCanvas, x, y, w, h); ctx.restore();
+        }
+
+        drawProceduralBorder(ctx, x, y, w, h, type) {
+            ctx.save();
+            if(!this.maskCanv) { this.maskCanv = document.createElement('canvas'); }
+            this.maskCanv.width = ctx.canvas.width; this.maskCanv.height = ctx.canvas.height;
+            const mCtx = this.maskCanv.getContext('2d');
+            
+            mCtx.fillStyle = "#000"; mCtx.fillRect(0,0,this.maskCanv.width, this.maskCanv.height);
+            mCtx.globalCompositeOperation = 'destination-out'; mCtx.fillStyle = "#FFF"; mCtx.beginPath();
+            
+            const roughness = 2.0; const step = 5;
+            for(let i=x; i<=x+w; i+=step) mCtx.lineTo(i, y + Math.random()*roughness);
+            for(let i=y; i<=y+h; i+=step) mCtx.lineTo(x+w - Math.random()*roughness, i);
+            for(let i=x+w; i>=x; i-=step) mCtx.lineTo(i, y+h - Math.random()*roughness);
+            for(let i=y+h; i>=y; i-=step) mCtx.lineTo(x + Math.random()*roughness, i);
+            mCtx.fill();
+            
+            if(type === 'negative') {
+                 mCtx.globalCompositeOperation = 'destination-out';
+                 const spW = 12, spH = 18, gap = 25;
+                 for(let i=0; i<this.maskCanv.width; i+=gap) {
+                     if(i > x-40 && i < x+w+20) mCtx.roundRect(i, y - 45, spW, spH, 2);
+                     if(i > x-40 && i < x+w+20) mCtx.roundRect(i, y + h + 25, spW, spH, 2);
+                 }
+                 mCtx.fill();
+            }
+            ctx.drawImage(this.maskCanv, 0, 0);
+
+            if(type === 'negative') {
+                ctx.fillStyle = "rgba(255,255,255,0.4)"; ctx.font = "bold 10px 'JetBrains Mono'";
+                const label = this.params.ratio === 'half' ? "PENTAX 17 / HALF" : (this.params.ratio===2.7?"HASSELBLAD XPAN":"KODAK PORTRA 400");
+                ctx.fillText(label, x + 20, y - 25);
+                ctx.fillText(this.params.ratio==='half'?"17-17A":"36", x + w - 40, y - 25);
+            }
+            ctx.restore();
+        }
+
+        drawGrain(ctx, x, y, w, h, amt) {
+            ctx.save(); ctx.globalCompositeOperation = 'overlay';
+            if(!this.grainPat) {
+                const c = document.createElement('canvas'); c.width=100; c.height=100;
+                const t = c.getContext('2d');
+                for(let i=0; i<3000; i++) { t.fillStyle = Math.random()>0.5 ? '#aaa' : '#444'; t.fillRect(Math.random()*100, Math.random()*100, 1.5, 1.5); }
+                this.grainPat = ctx.createPattern(c, 'repeat');
+            }
+            ctx.fillStyle = this.grainPat; ctx.globalAlpha = amt / 150; ctx.fillRect(x,y,w,h); ctx.restore();
+        }
+
+        // --- NEW IMPROVED DUST ALGORITHM ---
+        drawDust(ctx, x, y, w, h, amt) {
+            if(amt <= 0) return;
+            ctx.save();
+            
+            let seed = this.params.seed * 10000;
+            const rnd = () => { seed = Math.sin(seed)*10000; return seed - Math.floor(seed); };
+            
+            // 1. White specs (Screen - existing)
+            ctx.globalCompositeOperation = 'screen'; 
+            ctx.globalAlpha = (amt / 100) * 0.8; 
+            ctx.fillStyle = "rgba(255,255,255,0.7)";
+            for(let i=0; i<amt/2; i++) {
+                ctx.beginPath(); 
+                ctx.arc(x+rnd()*w, y+rnd()*h, rnd()*1.5, 0, Math.PI*2); 
+                ctx.fill();
+            }
+
+            // 2. Dark specks (Multiply - NEW)
+            // Needed so dust is visible on bright backgrounds
+            ctx.globalCompositeOperation = 'multiply';
+            ctx.globalAlpha = (amt / 100) * 0.5;
+            ctx.fillStyle = "rgba(0,0,0,0.7)";
+            for(let i=0; i<amt/3; i++) {
+                ctx.beginPath(); 
+                ctx.arc(x+rnd()*w, y+rnd()*h, rnd()*2, 0, Math.PI*2); 
+                ctx.fill();
+            }
+
+            // 3. Hairs / Scratches (Bezier - NEW)
+            ctx.globalCompositeOperation = 'screen';
+            ctx.globalAlpha = (amt / 100) * 0.6;
+            ctx.strokeStyle = "rgba(255,255,255,0.6)";
+            ctx.lineWidth = 0.5;
+            
+            for(let i=0; i<amt/5; i++) {
+                let sx = x+rnd()*w, sy = y+rnd()*h;
+                ctx.beginPath();
+                ctx.moveTo(sx, sy);
+                ctx.bezierCurveTo(
+                    sx + (rnd()-0.5)*30, sy + (rnd()-0.5)*30,
+                    sx + (rnd()-0.5)*30, sy + (rnd()-0.5)*30,
+                    sx + (rnd()-0.5)*50, sy + (rnd()-0.5)*50
+                );
+                ctx.stroke();
+            }
+            
+            ctx.restore();
+        }
+
+        drawDate(ctx, x, y) {
+            ctx.save(); ctx.font = "bold 30px 'Oswald'"; ctx.fillStyle = "#ff9500";
+            ctx.shadowColor = "#ff4500"; ctx.shadowBlur = 8; ctx.textAlign = "right"; ctx.globalCompositeOperation = "screen";
+            const d = new Date(); const str = `'${d.getFullYear().toString().substr(2)} ${d.getMonth()+1} ${d.getDate()}`;
+            ctx.fillText(str, x, y); ctx.restore();
+        }
+
+        exportImage() {
+            this.render(false);
+            setTimeout(() => {
+                const link = document.createElement('a');
+                link.download = `LUMINA_PRO_${this.params.ratio==='half'?'HALF':'FILM'}_${Date.now()}.jpg`;
+                link.href = this.canvas.toDataURL('image/jpeg', 0.95);
+                link.click();
+            }, 50);
+        }
+    }
+
+    const app = new LuminaOmega();
+</script>
+</body>
+</html>
